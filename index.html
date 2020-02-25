@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script language='JavaScript' src="flash-cards.js"></script>
+    <script language='JavaScript'>
+      var flashCards = new FlashCards();
+
+      var nextFlashCard;
+
+      function init(){
+        var answerDiv = document.getElementById("answer");
+        var questionDiv = document.getElementById("question");
+        var answerArea = document.getElementById("answerArea");
+          answerDiv.innerHTML  = "";
+        answerArea.value = "";
+        questionDiv.innerHTML = "";
+  
+      };
+      
+      function nextCard(){
+        var answerDiv = document.getElementById("answer");
+        var questionDiv = document.getElementById("question");
+        var answerArea = document.getElementById("answerArea");
+        nextFlashCard = getRandomInt(0, flashCards.cards.length - 1);
+        answerDiv.innerHTML  = '';
+        answerArea.value = "";
+        questionDiv.innerHTML = flashCards.cards[nextFlashCard].question;
+      };
+      
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
+
+      function checkAnswer(){
+        var answerText = document.getElementById("answerText").value;
+        var answer = flashCards.cards[nextFlashCard].answer;
+        var messageDiv = document.getElementById("messageDiv");
+        if (answerText === answer){
+          messageDiv.innerHTML = "Correct";
+        } else {
+          messageDiv.innerHTML = "Incorrect";
+        }
+      };
+
+      function showAnswer(){
+        answerDiv = document.getElementById('answer');
+        answerDiv.innerHTML  = flashCards.cards[nextFlashCard].answer;
+      };
+      
+    </script>
+  </head>
+  <body >
+    <div id='question'></div>
+    <div id='answer'></div>
+    <div id='answerArea'>
+      <textarea id="answerText" rows="4" cols="50" placeholder=""></textarea>
+    </div>
+    <div id='nextButtonDiv'>
+      <button id='nextButton' onclick="nextCard()">Next</button>
+    </div>
+    <div id='checkAnswerDiv'>
+      <button id='checkAnswerBtn' onclick="checkAnswer()">Check</button>
+    </div>
+    <div id='showAnswerDiv'>
+      <button id='showAnswerbutton' onclick="showAnswer()">Show Answer</button>
+	<div id='showAnswerTextDiv'></div>
+    </div>
+    <div id='messageDiv'>
+    </div>
+  </body>
+</html>
