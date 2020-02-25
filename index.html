@@ -6,24 +6,14 @@
       var flashCards = new FlashCards();
 
       var nextFlashCard;
-
-      function init(){
-        var answerDiv = document.getElementById("answer");
-        var questionDiv = document.getElementById("question");
-        var answerArea = document.getElementById("answerArea");
-          answerDiv.innerHTML  = "";
-        answerArea.value = "";
-        questionDiv.innerHTML = "";
-  
-      };
       
       function nextCard(){
         var answerDiv = document.getElementById("answer");
         var questionDiv = document.getElementById("question");
-        var answerArea = document.getElementById("answerArea");
+        var answerText = document.getElementById("answerText");
         nextFlashCard = getRandomInt(0, flashCards.cards.length - 1);
         answerDiv.innerHTML  = '';
-        answerArea.value = "";
+        answerText.value = "";
         questionDiv.innerHTML = flashCards.cards[nextFlashCard].question;
       };
       
@@ -48,14 +38,18 @@
         answerDiv = document.getElementById('answer');
         answerDiv.innerHTML  = flashCards.cards[nextFlashCard].answer;
       };
-      
+
+      function init(){
+      var answerText = document.getElementById("answerText");
+      answerText.value = "";
+      };
     </script>
   </head>
-  <body >
+  <body onload="init()">
     <div id='question'></div>
     <div id='answer'></div>
     <div id='answerArea'>
-      <textarea id="answerText" rows="4" cols="50" placeholder=""></textarea>
+      <textarea id="answerText" rows="4" cols="50"></textarea>
     </div>
     <div id='nextButtonDiv'>
       <button id='nextButton' onclick="nextCard()">Next</button>
